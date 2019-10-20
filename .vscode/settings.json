@@ -1,0 +1,6 @@
+{
+    "search.exclude": {
+        "themes/academic": true
+    },
+    "editor.tabSize": 2
+}
