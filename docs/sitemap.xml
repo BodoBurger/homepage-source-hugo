@@ -3,39 +3,213 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://bodoburger.github.io/homepage-source-hugo/authors/admin/</loc>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/courses/example/example1/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/courses/example/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-install/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/courses/example/example2/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-uninstall/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-update/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-path/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://bodoburger.github.io/homepage-source-hugo/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/talk/example/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/post/writing-technical-content/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/authors/admin/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication_types/3/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication/preprint/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://bodoburger.github.io/homepage-source-hugo/authors/</loc>
-  </url>
-  
-  <url>
-    <loc>https://bodoburger.github.io/homepage-source-hugo/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://bodoburger.github.io/homepage-source-hugo/post/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://bodoburger.github.io/homepage-source-hugo/publication_types/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://bodoburger.github.io/homepage-source-hugo/publication/</loc>
-  </url>
-  
-  <url>
-    <loc>https://bodoburger.github.io/homepage-source-hugo/talk/</loc>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/tags/source-themes/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://bodoburger.github.io/homepage-source-hugo/tags/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/post/jupyter/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/slides/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/slides/example/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/example/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/tags/deep-learning/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/tags/demo/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/project/external-project/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/project/internal-project/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/project/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/tags/academic/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/post/getting-started/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/categories/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/categories/demo/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication_types/2/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication/journal-article/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/authors/robert-ford/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication_types/1/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication/conference-paper/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/courses/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/post/</loc>
+    <lastmod>2019-05-06T17:54:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/publication/</loc>
+    <lastmod>2019-05-06T17:54:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/talk/</loc>
+    <lastmod>2019-05-06T17:54:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bodoburger.github.io/homepage-source-hugo/wiki/</loc>
+    <lastmod>2019-10-20T03:25:11+02:00</lastmod>
   </url>
   
 </urlset>

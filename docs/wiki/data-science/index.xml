@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/index.xml" rel="self" type="application/rss+xml" />
+    <description>Overview</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 09 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>Overview</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/</link>
+    </image>
+    
+    <item>
+      <title>Installing Anaconda</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-install/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.anaconda.com/anaconda/install/linux/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.anaconda.com/distribution/#linux&#34; target=&#34;_blank&#34;&gt;Installer for Linux&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash ~/Downloads/Anaconda3-2019.03-Linux-x86_64.sh
+
+conda update conda
+conda update anaconda
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;change-kernel-in-jupyter&#34;&gt;Change kernel in jupyter&lt;/h2&gt;
+
+&lt;p&gt;Base environment needs the nb_conda_kernels package.
+Every environment needs the ipykernel package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda install nb_conda_kernels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deep-learning-environment&#34;&gt;Deep learning environment&lt;/h2&gt;
+
+&lt;p&gt;Prereq:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
+
+sudo apt install graphviz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;conda create -n deeplearn
+source activate deeplearn
+
+conda install tensorflow-gpu
+
+conda install matplotlib yaml
+conda install opencv # needed for some examples
+conda install pydot # graphviz
+conda install pillow # python imaging library
+
+conda install cython # Why?
+
+conda install keras-gpu
+
+conda install ipykernel # for kernel selection in jupyter
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deeplearn-tensorflow-2-0&#34;&gt;Deeplearn Tensorflow 2.0&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.tensorflow.org/install/gpu&#34; target=&#34;_blank&#34;&gt;https://www.tensorflow.org/install/gpu&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda install pip
+
+pip install tensorflow-gpu
+pip install tensorflow-datasets
+
+pip install matplotlib PyYAML opencv-python pydot pillow cython
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;check-tensorflow-and-keras-gpu&#34;&gt;Check tensorflow and keras gpu&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+tf.test.is_gpu_available(
+    cuda_only=False,
+    min_cuda_compute_capability=None
+)
+
+from keras import backend as K
+K.tensorflow_backend._get_available_gpus()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;archived&#34;&gt;Archived&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.pugetsystems.com/labs/hpc/Install-TensorFlow-with-GPU-Support-the-Easy-Way-on-Ubuntu-18-04-without-installing-CUDA-1170/&#34; target=&#34;_blank&#34;&gt;Install TensorFlow with GPU Support the Easy Way&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Uninstalling Anaconda</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-uninstall/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-uninstall/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.anaconda.com/anaconda/install/uninstall/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For a clean uninstall, first install &lt;em&gt;anaconda-clean&lt;/em&gt; package,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;conda install anaconda-clean
+anaconda-clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rm -rf ~/anaconda3
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Updating Anaconda</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-update/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-update/</guid>
+      <description>
+
+&lt;h2 id=&#34;update-base-environment&#34;&gt;Update base environment&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;conda update conda
+conda update anaconda
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;update-all-packages&#34;&gt;Update all packages&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;conda update --all
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>System Path</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-path/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/data-science/anaconda/anaconda-path/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.anaconda.com/anaconda/user-guide/faq/#installing-anaconda&#34; target=&#34;_blank&#34;&gt;Anaconda-FAQ on whether you should add Anaconda to the PATH&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;temporarily&#34;&gt;Temporarily&lt;/h3&gt;
+
+&lt;p&gt;To add Anaconda temporarily to the PATH, open a terminal and type:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;export PATH=&amp;quot;/home/bodo/anaconda3/bin:$PATH&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Show PATH:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;echo $PATH&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
