@@ -18,13 +18,13 @@ weight: 2
 
 For a clean uninstall, first install *anaconda-clean* package,
 
-```
+```bash
 conda install anaconda-clean
 anaconda-clean
 ```
 
 then:
 
-```
+```bash
 rm -rf ~/anaconda3
 ```

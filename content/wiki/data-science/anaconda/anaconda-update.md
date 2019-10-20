@@ -15,13 +15,13 @@ weight: 3
 
 ## Update base environment
 
-```
+```bash
 conda update conda
 conda update anaconda
 ```
 
 ## Update all packages
 
-```
+```bash
 conda update --all
 ```

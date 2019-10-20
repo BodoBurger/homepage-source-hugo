@@ -43,12 +43,12 @@ Every environment needs the ipykernel package.&lt;/p&gt;
 
 &lt;p&gt;Prereq:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
 
 sudo apt install graphviz
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;conda create -n deeplearn
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create -n deeplearn
 source activate deeplearn
 
 conda install tensorflow-gpu
@@ -69,7 +69,7 @@ conda install ipykernel # for kernel selection in jupyter
 
 &lt;p&gt;&lt;a href=&#34;https://www.tensorflow.org/install/gpu&#34; target=&#34;_blank&#34;&gt;https://www.tensorflow.org/install/gpu&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;conda install pip
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;conda install pip
 
 pip install tensorflow-gpu
 pip install tensorflow-datasets
@@ -79,7 +79,7 @@ pip install matplotlib PyYAML opencv-python pydot pillow cython
 
 &lt;h2 id=&#34;check-tensorflow-and-keras-gpu&#34;&gt;Check tensorflow and keras gpu&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow as tf
 tf.test.is_gpu_available(
     cuda_only=False,
     min_cuda_compute_capability=None
@@ -108,13 +108,13 @@ K.tensorflow_backend._get_available_gpus()
 
 &lt;p&gt;For a clean uninstall, first install &lt;em&gt;anaconda-clean&lt;/em&gt; package,&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;conda install anaconda-clean
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;conda install anaconda-clean
 anaconda-clean
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;then:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;rm -rf ~/anaconda3
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;rm -rf ~/anaconda3
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -128,13 +128,13 @@ anaconda-clean
 
 &lt;h2 id=&#34;update-base-environment&#34;&gt;Update base environment&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;conda update conda
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;conda update conda
 conda update anaconda
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;update-all-packages&#34;&gt;Update all packages&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;conda update --all
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;conda update --all
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>

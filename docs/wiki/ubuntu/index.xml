@@ -1,16 +1,255 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Overview | Bodo Burger</title>
+    <title>Ubuntu Wiki | Bodo Burger</title>
     <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/</link>
       <atom:link href="https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/index.xml" rel="self" type="application/rss+xml" />
-    <description>Overview</description>
+    <description>Ubuntu Wiki</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 09 Sep 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
-      <title>Overview</title>
+      <title>Ubuntu Wiki</title>
       <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/</link>
     </image>
+    
+    <item>
+      <title>Basic tweaks and configuration</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/basic-tweaks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/basic-tweaks/</guid>
+      <description>
+
+&lt;h2 id=&#34;disable-middle-click-paste&#34;&gt;Disable middle click paste&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.ubuntuusers.de/GNOME_Tweak_Tool/&#34; target=&#34;_blank&#34;&gt;https://wiki.ubuntuusers.de/GNOME_Tweak_Tool/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;disable-looking-for-wifi-printer&#34;&gt;Disable looking for wifi printer&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/etc/cups/cups-browsed.conf
+
+## Change BrowseRemoteProtocols dnssd cups to
+BrowseRemoteProtocols none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://ubuntuforums.org/showthread.php?t=2330752&#34; target=&#34;_blank&#34;&gt;https://ubuntuforums.org/showthread.php?t=2330752&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;keyboardshortcut-power-off&#34;&gt;Keyboardshortcut Power off&lt;/h2&gt;
+
+&lt;p&gt;Adding shortcut for &lt;em&gt;Power off&lt;/em&gt; screen by setting custom shortcut:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gnome-session-quit --power-off&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;kein-lock-screen-nach-suspend&#34;&gt;Kein Lock screen nach Suspend&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.techgrube.de/tutorials/ubuntu-sperrbildschirm-nach-standby-deaktivieren&#34; target=&#34;_blank&#34;&gt;https://www.techgrube.de/tutorials/ubuntu-sperrbildschirm-nach-standby-deaktivieren&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Die gewünschte Einstellung findet man dann unter org -&amp;gt; Gnome -&amp;gt; Desktop -&amp;gt; screensaver. Hier entfernt man einfach bei ubuntu-lock-on-suspend das Häkchen.&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing software</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/install-software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/install-software/</guid>
+      <description>
+
+&lt;h2 id=&#34;software-list&#34;&gt;Software list&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;APT
+
+&lt;ul&gt;
+&lt;li&gt;chromium-browser&lt;/li&gt;
+&lt;li&gt;TexLive &lt;code&gt;sudo apt install texlive-full&lt;/code&gt; (4GB)&lt;/li&gt;
+&lt;li&gt;R (&lt;a href=&#34;https://bodoburger.github.io/homepage-source-hugo/homepage-source-hugo/wiki/ubuntu/r-stats/&#34; target=&#34;_blank&#34;&gt;more info&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Scribus&lt;/li&gt;
+&lt;li&gt;VLC&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Snap
+
+&lt;ul&gt;
+&lt;li&gt;keepassxc&lt;/li&gt;
+&lt;li&gt;gimp&lt;/li&gt;
+&lt;li&gt;go (and hugo)&lt;/li&gt;
+&lt;li&gt;node&lt;/li&gt;
+&lt;li&gt;onlyoffice&lt;/li&gt;
+&lt;li&gt;Octave (Matlab alternative)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Flatpak
+
+&lt;ul&gt;
+&lt;li&gt;libreoffice&lt;/li&gt;
+&lt;li&gt;Epub: Bookworm&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;.deb (manually)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34;&gt;Rstudio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://code.visualstudio.com/&#34; target=&#34;_blank&#34;&gt;VS Code&lt;/a&gt; (.deb package installs apt repo)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://code-industry.net/free-pdf-editor/&#34; target=&#34;_blank&#34;&gt;Master PDF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;.sh
+
+&lt;ul&gt;
+&lt;li&gt;Anaconda&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;alarm-clock-and-timer&#34;&gt;Alarm clock and timer&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.ubuntuusers.de/Alarm_Clock/&#34; target=&#34;_blank&#34;&gt;https://wiki.ubuntuusers.de/Alarm_Clock/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt install alarm-clock-applet
+
+sudo apt install sound-icons # folder location: /usr/share/sounds/sound-icons/.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;nvidia-drivers&#34;&gt;Nvidia drivers&lt;/h3&gt;
+
+&lt;p&gt;&amp;ldquo;Software &amp;amp; Updates &amp;ndash;&amp;gt; Additional Drivers&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;package-management&#34;&gt;Package management&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.dpmb.org/debian-paketmanagement.chunked/ch03s02.html&#34; target=&#34;_blank&#34;&gt;https://book.dpmb.org/debian-paketmanagement.chunked/ch03s02.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://book.dpmb.org/debian-paketmanagement.chunked/ch03s03.html&#34; target=&#34;_blank&#34;&gt;https://book.dpmb.org/debian-paketmanagement.chunked/ch03s03.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PDF</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/pdf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/pdf/</guid>
+      <description>
+
+&lt;h2 id=&#34;extracting-photos-from-multiple-pdfs-using-pdfunite-and-pdfimages&#34;&gt;Extracting photos from multiple PDFs using pdfunite and pdfimages&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;pdfunite *.pdf allphotos.pdf
+
+pdfimages -j ‘allphotos.pdf’ image
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>R, packages and its dependencies</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/r-stats/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/r-stats/</guid>
+      <description>
+
+&lt;p&gt;Install libopenblas at first:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.r-bloggers.com/why-is-r-slow-some-explanations-and-mklopenblas-setup-to-try-to-fix-this/&#34; target=&#34;_blank&#34;&gt;https://www.r-bloggers.com/why-is-r-slow-some-explanations-and-mklopenblas-setup-to-try-to-fix-this/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cloud.r-project.org/bin/linux/ubuntu/README.html&#34; target=&#34;_blank&#34;&gt;https://cloud.r-project.org/bin/linux/ubuntu/README.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# adding secure apt key:
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+# adding cran-mirror for Ubuntu 18.04:
+sudo add-apt-repository &#39;deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/&#39;
+
+# archive server
+sudo add-apt-repository &#39;deb http://ubuntu.mirror.lrz.de/ubuntu/ bionic-backports main restricted universe&#39;
+
+# installing r-base and r-dev
+sudo apt update
+sudo apt install r-base r-base-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RStudio: &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34;&gt;https://www.rstudio.com/products/rstudio/download/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;dependencies-of-r-packages&#34;&gt;Dependencies of R packages&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#&amp;quot;rgl&amp;quot;
+sudo apt install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev libfreetype6-dev
+
+# &amp;quot;devtools&amp;quot;:
+sudo apt install libcurl4-openssl-dev libssl-dev
+
+# &amp;quot;XML&amp;quot;:
+sudo apt install libxml2-dev
+
+# &amp;quot;rattle&amp;quot;:
+sudo apt install libcanberra-gtk-module
+sudo apt install wajig
+wajig install libgtk2.0-dev libxml2-dev
+
+# &amp;quot;cairo&amp;quot;:
+sudo apt-get install libcairo2-dev
+
+# &amp;quot;sbrl&amp;quot;
+sudo apt install libgsl-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;rweka&#34;&gt;RWeka:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;java –version
+
+sudo apt install default-jre default-jdk
+
+javac -version
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TLP – Linux Advanced Power Management</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/tlp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/tlp/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://thinkwiki.de/TLP_-_Linux_Stromsparen&#34; target=&#34;_blank&#34;&gt;http://thinkwiki.de/TLP_-_Linux_Stromsparen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://linrunner.de/en/tlp/tlp.html&#34; target=&#34;_blank&#34;&gt;http://linrunner.de/en/tlp/tlp.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo apt install tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
+
+# bluetooth off at startup:
+gksudo gedit /etc/default/tlp # does not work with WAYLAND
+
+DEVICES_TO_DISABLE_ON_STARTUP=&amp;quot;bluetooth&amp;quot;
+
+# Akku-Ladeschwellen vorübergehend auf Maximum setzen
+sudo tlp fullcharge [ BAT0 | BAT1 ]
+
+# Akku einmalig bis zur oberen Schwelle laden
+sudo tlp chargeonce [ BAT0 | BAT1 ]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>USB storage</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/usb-storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/wiki/ubuntu/usb-storage/</guid>
+      <description>
+
+&lt;h2 id=&#34;mount&#34;&gt;Mount&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;sudo mount -o remount,rw /media/&amp;lt;storage-name&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;error-can-t-format-usb-storage&#34;&gt;Error: &lt;em&gt;Can&amp;rsquo;t format USB storage&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;I got this fixed by doing the following&lt;/p&gt;
+
+&lt;p&gt;Type disks and launch the program,
+select the disk or drive you want to format,
+press CTRL+F and click format.&lt;/p&gt;
+
+&lt;p&gt;After formatting, the disk or drive would be unallocated, therefore you&amp;rsquo;ll have to create a partition by using the plus button on the screen.. Then insert the name you&amp;rsquo;ll like to use as the drive or disk name then click on create. Enjoy&amp;hellip;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://askubuntu.com/questions/769079/cant-format-ubuntu-installation-stick/769094&#34; target=&#34;_blank&#34;&gt;https://askubuntu.com/questions/769079/cant-format-ubuntu-installation-stick/769094&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>

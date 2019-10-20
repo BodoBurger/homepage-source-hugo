@@ -86,7 +86,7 @@ sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently su
   
   
   
-  <link rel="stylesheet" href="/homepage-source-hugo/css/academic.min.41f7693c653e1365c01b4222f0af3f03.css">
+  <link rel="stylesheet" href="/homepage-source-hugo/css/academic.min.89c159036fd5fc85df286f54aed8999a.css">
 
   
 
@@ -507,12 +507,12 @@ Every environment needs the ipykernel package.</p>
 
 <p>Prereq:</p>
 
-<pre><code>sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
+<pre><code class="language-bash">sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
 
 sudo apt install graphviz
 </code></pre>
 
-<pre><code>conda create -n deeplearn
+<pre><code class="language-bash">conda create -n deeplearn
 source activate deeplearn
 
 conda install tensorflow-gpu
@@ -533,7 +533,7 @@ conda install ipykernel # for kernel selection in jupyter
 
 <p><a href="https://www.tensorflow.org/install/gpu" target="_blank">https://www.tensorflow.org/install/gpu</a></p>
 
-<pre><code>conda install pip
+<pre><code class="language-bash">conda install pip
 
 pip install tensorflow-gpu
 pip install tensorflow-datasets
@@ -543,7 +543,7 @@ pip install matplotlib PyYAML opencv-python pydot pillow cython
 
 <h2 id="check-tensorflow-and-keras-gpu">Check tensorflow and keras gpu</h2>
 
-<pre><code>import tensorflow as tf
+<pre><code class="language-python">import tensorflow as tf
 tf.test.is_gpu_available(
     cuda_only=False,
     min_cuda_compute_capability=None
@@ -639,6 +639,10 @@ K.tensorflow_backend._get_available_gpus()
       
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
         

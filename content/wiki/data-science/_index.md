@@ -1,7 +1,7 @@
 ---
 # Course title, summary, and position.
 linktitle: Data Science
-summary: Notes on data science tools, techniques and resources.
+summary: Data science tools, techniques and resources.
 weight: 1
 
 # Page metadata.

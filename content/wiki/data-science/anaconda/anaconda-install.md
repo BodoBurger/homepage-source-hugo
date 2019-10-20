@@ -36,13 +36,13 @@ conda install nb_conda_kernels
 
 Prereq:
 
-```
+```bash
 sudo apt-get install libhdf5-serial-dev # for saving keras models efficiently
 
 sudo apt install graphviz
 ```
 
-```
+```bash
 conda create -n deeplearn
 source activate deeplearn
 
@@ -64,7 +64,7 @@ conda install ipykernel # for kernel selection in jupyter
 
 https://www.tensorflow.org/install/gpu
 
-```
+```bash
 conda install pip
 
 pip install tensorflow-gpu
@@ -75,7 +75,7 @@ pip install matplotlib PyYAML opencv-python pydot pillow cython
 
 ## Check tensorflow and keras gpu
 
-```
+```python
 import tensorflow as tf
 tf.test.is_gpu_available(
     cuda_only=False,
