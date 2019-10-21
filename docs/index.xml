@@ -5,7 +5,7 @@
     <link>https://bodoburger.github.io/homepage-source-hugo/</link>
       <atom:link href="https://bodoburger.github.io/homepage-source-hugo/index.xml" rel="self" type="application/rss+xml" />
     <description>Bodo Burger</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
       <title>Bodo Burger</title>
@@ -13,27 +13,26 @@
     </image>
     
     <item>
-      <title>Slides</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/slides/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/slides/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>An example title</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/example/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/example/</guid>
-      <description>&lt;p&gt;Add your &lt;em&gt;content&lt;/em&gt; here&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Projects</title>
       <link>https://bodoburger.github.io/homepage-source-hugo/project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       <guid>https://bodoburger.github.io/homepage-source-hugo/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/aboutme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/aboutme/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/contact/</guid>
       <description></description>
     </item>
     
@@ -46,10 +45,10 @@
     </item>
     
     <item>
-      <title>Courses</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/courses/</link>
+      <title></title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/zzz/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/courses/</guid>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/zzz/</guid>
       <description></description>
     </item>
     
@@ -66,14 +65,6 @@
       <link>https://bodoburger.github.io/homepage-source-hugo/publication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://bodoburger.github.io/homepage-source-hugo/publication/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/talk/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/talk/</guid>
       <description></description>
     </item>
     
