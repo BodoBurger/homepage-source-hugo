@@ -5,7 +5,7 @@
     <link>https://bodoburger.github.io/homepage-source-hugo/categories/</link>
       <atom:link href="https://bodoburger.github.io/homepage-source-hugo/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
       <title>Categories</title>
@@ -13,10 +13,18 @@
     </image>
     
     <item>
-      <title>Demo</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/categories/demo/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/categories/demo/</guid>
+      <title>tutorial</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/categories/tutorial/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cheatsheets</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/categories/cheatsheets/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/categories/cheatsheets/</guid>
       <description></description>
     </item>
     

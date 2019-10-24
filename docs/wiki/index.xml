@@ -5,7 +5,7 @@
     <link>https://bodoburger.github.io/homepage-source-hugo/wiki/</link>
       <atom:link href="https://bodoburger.github.io/homepage-source-hugo/wiki/index.xml" rel="self" type="application/rss+xml" />
     <description>Wiki</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright>
     <image>
       <url>https://bodoburger.github.io/homepage-source-hugo/img/headers/wiki-eugenio-mazzone.jpg</url>
       <title>Wiki</title>

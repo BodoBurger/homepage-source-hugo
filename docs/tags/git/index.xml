@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/tags/git/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <description>git</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Tue, 11 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>git</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/git/</link>
+    </image>
+    
+    <item>
+      <title>Git Resources and Cheat Sheet</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/post/2017-07-git-cheat-sheet/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/post/2017-07-git-cheat-sheet/</guid>
+      <description>
+
+&lt;p&gt;This blog post serves as a cheat sheet for git commands
+I found myself googling again and again.
+It will be updated from time to time.&lt;/p&gt;
+
+&lt;h2 id=&#34;useful-articles-resources&#34;&gt;Useful articles / resources&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://git-scm.com/docs&#34; target=&#34;_blank&#34;&gt;Git reference manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/315911/git-for-beginners-the-definitive-practical-guide&#34; target=&#34;_blank&#34;&gt;Git for beginners on stackoverflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://git-scm.com/book/en/v2&#34; target=&#34;_blank&#34;&gt;Pro Git book (2nd, 2014)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://justinhileman.info/article/git-pretty/&#34; target=&#34;_blank&#34;&gt;Git pretty chart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://sethrobertson.github.io/GitFixUm/fixup.html&#34; target=&#34;_blank&#34;&gt;On undoing, fixing, or removing commits in git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://nvie.com/posts/a-successful-git-branching-model/&#34; target=&#34;_blank&#34;&gt;A successful Git branching model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://chris.beams.io/posts/git-commit/&#34; target=&#34;_blank&#34;&gt;How to Write a Git Commit Message&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/&#34; target=&#34;_blank&#34;&gt;The beginner&amp;rsquo;s guide to contributing to a GitHub project&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://lornajane.net/posts/2015/code-reviews-before-you-even-run-the-code&#34; target=&#34;_blank&#34;&gt;Code Reviews: Before You Even Run The Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;change-branch-without-committing-changes-stash-and-pop&#34;&gt;Change branch without committing changes: stash and pop&lt;/h2&gt;
+
+&lt;p&gt;Want to have a look at another branch without committing changes done so far?
+Put them in a stash where they can hide until you switch back.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# on branch dev
+git stash
+git checkout master
+
+# do stuff on master
+
+# back to dev
+git checkout dev
+git stash pop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/a/16114694&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;,
+&lt;a href=&#34;https://git-scm.com/docs/git-stash&#34; target=&#34;_blank&#34;&gt;more about &lt;em&gt;git-stash&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-a-local-branch-push-it-to-a-remote-repository-and-track-it&#34;&gt;Create a local branch, push it to a remote repository and track it&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# create and switch to new branch
+git checkout -b MyNewBranch
+
+# do some stuff
+
+git push -u origin MyNewBranch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;delete-local-branch&#34;&gt;Delete local branch&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git branch -d MyLocalBranch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
