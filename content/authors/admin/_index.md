@@ -13,9 +13,9 @@ superuser: true
 role: Statistician, Data Scientist, Machine Learner
 
 # Organizations/Affiliations
-organizations:
-- name: Ludwig-Maximilians-Universität
-  url: ""
+#organizations:
+#- name: Ludwig-Maximilians-Universität
+#  url: ""
 
 # Short bio (displayed in user profile at end of posts)
 bio: I am a statistician based in Munich, Germany. I hold a Master’s degree in statistics and a Bachelor’s degree in economics.
@@ -42,7 +42,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: '#contact'  # For a direct email link, use "mailto:test@example.org".
+  link: 'contact'  # For a direct email link, use "mailto:test@example.org".
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/bododata
