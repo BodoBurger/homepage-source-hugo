@@ -1,0 +1,11 @@
+# Font style metadata
+name = "Minimal Plus"
+
+# Optional Google font URL
+google_fonts = "Fira+Sans:400,700|Montserrat:300,300italic,400|Droid+Sans+Mono"
+
+# Font families
+heading_font = "Fira Sans"
+body_font = "Montserrat"
+nav_font = "Montserrat"
+mono_font = "Droid Sans Mono"
