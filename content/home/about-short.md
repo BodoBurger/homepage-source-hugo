@@ -13,7 +13,7 @@ title = ""
 author = "admin"
 
 [design.background]
-  image = "headers/data-idea-franki-chamaki.jpg"
+  image = "headers/data-better-idea.jpg"
   image_darken = 0.8
   image_size = "cover"
 
