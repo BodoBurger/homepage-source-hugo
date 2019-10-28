@@ -1,9 +1,8 @@
 ---
-title: Internal Project
-summary: An example of using the in-built project page.
-tags:
-- Deep Learning
-date: "2016-04-27T00:00:00Z"
+title: Data Analysis for Helmholtz Zentrum München
+summary: Student consulting project for the Institut for Epidemiology on the association of metabolic pathways with cardiovascular diseases and diabetes.
+tags: ["Health Sector"]
+date: "2017-04-07"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
@@ -11,16 +10,6 @@ external_link: ""
 image:
   caption: Photo by rawpixel on Unsplash
   focal_point: Smart
-
-links:
-- icon: twitter
-  icon_pack: fab
-  name: Follow
-  url: https://twitter.com/georgecushen
-url_code: ""
-url_pdf: ""
-url_slides: ""
-url_video: ""
 
 # Slides (optional).
 #   Associate this project with Markdown slides.
