@@ -2,7 +2,6 @@
 title: "An example journal article"
 authors:
 - admin
-- Robert Ford
 date: "2015-09-01T00:00:00Z"
 doi: ""
 
@@ -41,7 +40,7 @@ url_source: ''
 url_video: ''
 
 # Featured image
-# To use, add an image named `featured.jpg/png` to your page's folder. 
+# To use, add an image named `featured.jpg/png` to your page's folder.
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/jdD8gXaTZsc)'
   focal_point: ""

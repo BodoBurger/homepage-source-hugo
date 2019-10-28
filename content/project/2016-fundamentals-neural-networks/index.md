@@ -1,8 +1,8 @@
 ---
-title: Data Analysis for Helmholtz Zentrum München
-summary: Student consulting project for the Institut for Epidemiology on the association of metabolic pathways with cardiovascular diseases and diabetes.
-tags: ["Health Sector"]
-date: "2017-04-07"
+title: Fundamentals of Neural Networks
+summary: Seminar paper on why do neural nets work, essential building blocks of feedforward neural nets and training via gradient descent and back-propagation.
+tags: ["Deep Learning", "Artificial Intelligence", "Neural Networks"]
+date: "2016-01-30"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
@@ -11,12 +11,18 @@ image:
   caption:
   focal_point: Smart
 
+links:
+- icon: file-pdf
+  icon_pack: fas
+  name: Slides
+  url: slides.pdf
+
 # Slides (optional).
 #   Associate this project with Markdown slides.
 #   Simply enter your slide deck's filename without extension.
 #   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
 #   Otherwise, set `slides = ""`.
-slides: example
+slides:
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.

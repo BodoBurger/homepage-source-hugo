@@ -9,13 +9,13 @@
   weight = 20
 
 [[main]]
-  name = "Blog"
-  url = "post"
+  name = "Projects"
+  url = "project/"
   weight = 30
 
 [[main]]
-  name = "Projects"
-  url = "project/"
+  name = "Blog"
+  url = "post"
   weight = 40
 
 [[main]]
