@@ -4,7 +4,7 @@ authors:
   - admin
 date: "2019-04-01"
 tags: ["r-stats"]
-categories: ["tutorial"]
+categories: ["Tutorials"]
 output:
   md_document:
     variant: markdown+yaml_metadata_block

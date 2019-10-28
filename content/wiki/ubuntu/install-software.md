@@ -16,10 +16,11 @@ weight: 2
 
 - APT
   - chromium-browser
-  - TexLive `sudo apt install texlive-full` (4GB)
-  - R ([more info]({{< relref "./r-stats.md" >}}))
+  - TexLive: `sudo apt install texlive-full` (4GB)
+  - R ([more info](../r-stats))
   - Scribus
   - VLC
+  - [darktable](https://www.darktable.org/install): `bash sudo apt install darktable`
 - Snap
   - keepassxc
   - gimp
