@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interpretable ML | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/tags/interpretable-ml/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/tags/interpretable-ml/index.xml" rel="self" type="application/rss+xml" />
+    <description>Interpretable ML</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Sat, 06 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>Interpretable ML</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/interpretable-ml/</link>
+    </image>
+    
+    <item>
+      <title>Feature Effects in Machine Learning Models</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/project/2019-feature-effects/</link>
+      <pubDate>Sat, 06 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/project/2019-feature-effects/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#summary&#34;&gt;Summary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#example-bike-sharing-data&#34;&gt;Example: Bike Sharing Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#model-training&#34;&gt;Model Training&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#analysis&#34;&gt;Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#r-package&#34;&gt;R package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;summary&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;Supervised machine learning models are mostly black boxes.
+The method I propose in my Master’s thesis tries to improve understanding of these black boxes.
+The goal is to find a way to quantify effect sizes of features.
+Average marginal effects are used in social sciences
+to determine effect sizes of logistic regression models.
+Applying this method to a machine learning model usually does not
+adequately represent the non-convex, non-monotonic response function.
+There are graphical methods like partial dependence plots or accumulated local effect plots
+that visualize the response functions but do not offer a quantitative interpretation.
+First, we use one of the latter methods to identify intervals
+within the response function is relatively stable.
+Second, we report some estimate of the feature effect separately for each interval.
+Our method determines the number of necessary intervals automatically.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-bike-sharing-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Example: Bike Sharing Data&lt;/h1&gt;
+&lt;p&gt;The following examples shows
+how the method can help to understand heterogeneous feature effects.
+We apply the method to the Bike Sharing dataset &lt;span class=&#34;citation&#34;&gt;(Fanaee-T and Gama 2013)&lt;/span&gt;
+which was further processed by &lt;span class=&#34;citation&#34;&gt;Molnar (2018)&lt;/span&gt;.
+See table &lt;a href=&#34;#tab:bikes-load-data&#34;&gt;1&lt;/a&gt; for an overview of all the features.
+The target &lt;code&gt;cnt&lt;/code&gt; is the number of bicycles
+lent by a bicycle sharing company per day.
+The features comprise calendrical and meteorological information for each day.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:bikes-load-data&#34;&gt;Table 1: &lt;/span&gt;Excerpt of the Bike Sharing dataset&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;season&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;yr&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;mnth&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;holiday&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;weekday&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;weathersit&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;temp&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;hum&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;windspeed&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;cnt&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;days_since_2011&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SAT&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MISTY&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.18&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;80.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;985&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SUN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MISTY&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;69.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;801&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GOOD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.23&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;43.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;16.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1349&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;TUE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GOOD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1562&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;WED&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GOOD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.67&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;43.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1600&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;SPRING&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2011&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;JAN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;THU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GOOD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.60&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1606&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div id=&#34;model-training&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Model Training&lt;/h2&gt;
+&lt;p&gt;We use a linear model &lt;span class=&#34;citation&#34;&gt;(R Core Team 2019)&lt;/span&gt;, an SVM &lt;span class=&#34;citation&#34;&gt;(Meyer et al. 2019)&lt;/span&gt;,
+a random decision forest &lt;span class=&#34;citation&#34;&gt;(Breiman et al. 2018)&lt;/span&gt; and gradient boosting &lt;span class=&#34;citation&#34;&gt;(Greenwell et al. 2019)&lt;/span&gt;.
+We compare the performance of all models and the performance
+of predicting the mean for each observation on a hold-out test set
+(see table &lt;a href=&#34;#tab:bikes-model-training&#34;&gt;2&lt;/a&gt;).
+The linear model performs relatively well
+but we can improve by using a more complex machine learning model
+even without extensive tuning.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:bikes-model-training&#34;&gt;Table 2: &lt;/span&gt;Mean squared error, root mean squared log error,
+and R squared for hold-out test set&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mean(y)&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;lm&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;svm&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;rf&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;gbm&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;mse&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.75e+06&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.30e+05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.33e+05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.22e+05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.12e+05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;rmsle&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.93e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.36e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.44e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.61e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.30e-01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;rsq&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00e+00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.59e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.85e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.88e-01&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.90e-01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Analysis&lt;/h2&gt;
+&lt;p&gt;Now analyse how changing feature values influences
+the predicted number of bikes.
+We focus on the three numerical features &lt;code&gt;temp&lt;/code&gt; (temperature in degree Celsius),
+&lt;code&gt;hum&lt;/code&gt; (humidity in percent) and &lt;code&gt;windspeed&lt;/code&gt; (in kilometers per hour).
+We apply our method to each of the complex models with default settings.
+The output in &lt;code&gt;R&lt;/code&gt; looks as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## lm:
+##      temp       hum windspeed 
+##      98.2     -13.7     -40.1
+## SVM (temp)
+## [-5.221, 19.26) [19.26, 32.498] 
+##          128.11            3.87 
+## SVM (hum)
+## [18.792, 56.792) [56.792, 93.957] 
+##             7.19           -32.71 
+## SVM (windspeed)
+## [2.834, 14.876)    [14.876, 34] 
+##           -22.7           -64.7 
+## RF (temp)
+## [-5.221, 20.278) [20.278, 32.498] 
+##            104.5            -62.7 
+## RF (hum)
+## [18.792, 64.667) [64.667, 93.957] 
+##            -1.18           -31.97 
+## RF (windspeed)
+##  [2.834, 18.417) [18.417, 24.251)     [24.251, 34] 
+##           -16.46           -78.30            -1.64 
+## GBM (temp)
+## [-5.221, 16.792) [16.792, 26.075) [26.075, 32.498] 
+##            124.2             13.9           -239.7 
+## GBM (hum)
+## [18.792, 64.667) [64.667, 83.792)  [83.792, 87.25)  [87.25, 93.957] 
+##            -3.86           -39.63          -227.00            91.19 
+## GBM (windspeed)
+##   [2.834, 8.584)  [8.584, 22.959) [22.959, 24.251)     [24.251, 34] 
+##        -5.32e+01        -1.85e+01        -5.04e+02         6.60e-14&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The marginal effect of the linear model is equal to the model coefficients.
+So according to the model an increase of the temperature by 1° Celsius
+leads to a predicted increase of &lt;span class=&#34;math inline&#34;&gt;\(98.188\)&lt;/span&gt;. rented bicycles per day.
+This seems plausible for an average day.
+The higher the temperature the more people are willing to go by bike.
+But one could easily imagine that a temperature rise on a hot day
+will make people less likely rent a bike to avoid physical exertion.
+This is exactly what the results of the complex models suggest.
+Below 20° the SVM predicts an increase of
+&lt;span class=&#34;math inline&#34;&gt;\(128.106\)&lt;/span&gt;
+bikes per day for an additional degree Celsius.
+Above 20° the effect becomes negative and very small
+&lt;span class=&#34;math inline&#34;&gt;\((3.867)\)&lt;/span&gt;.
+The results of the random forest show two cutoff points.
+At around 13° the positive marginal effect becomes smaller in size
+and above 25° the effect is negative.
+The effect for gradient boosting is partitioned into four intervals.
+The effect of the three intervals below 27° are positive,
+above 27° it is negative, similarly to the results of the other two models.
+However, the absolute values of the effect fluctuate substantially
+for gradient boosting.&lt;/p&gt;
+&lt;p&gt;For humidity the linear model predicts a negative effect.
+For the SVM the effect is positive up to around 43%.
+Between 43% and 65% the effect is negative but smaller in size.
+Above 65% it is negative and
+four times bigger than in the previous interval.
+The results for the random forest and gradient boosting
+both show very small effects below roughly 65% humidity.
+Above this point both models predict a decrease of rented bicycles
+with rising humidity.
+The histogram (figure &lt;a href=&#34;#fig:bikes-hum-hist&#34;&gt;1&lt;/a&gt;) explains
+why the effect for humidity is probably non-monotonic.
+Humidity usually is between 50% to 75%.
+Values outside this range indicate more extreme weather conditions.
+If uncommonly dry or wet air reduces people’s desire to ride a bike
+we will expect a positive effect on the number of rented bikes
+if humidity is below the familiar range, and a negative effect if it is above.&lt;/p&gt;
+
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:bikes-hum-hist&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;figures/bikes-hum-hist-1.png&#34; alt=&#34;Histogram for feature humidity of the Bike Sharing dataset.&#34; width=&#34;40%&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Histogram for feature &lt;code&gt;humidity&lt;/code&gt; of the Bike Sharing dataset.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Wind makes cycling less attractive, so one associates higher wind speed
+with a reduced willingness to rent a bike.
+The linear model predicts a negative effect (&lt;span class=&#34;math inline&#34;&gt;\(-40.149\)&lt;/span&gt;).
+For both SVM and random forest our method proposes a negative effect
+that is constant over the whole feature distribution.
+Consequently, in the case of wind speed a linear model seems to be appropriate
+to represent the relationship.
+Gradient boosting shows a negative effect for five intervals,
+the reported values are not very stable, again.&lt;/p&gt;
+&lt;p&gt;In this exemplary application we showed that
+the linear model does not suffice to represent the varying response function types.
+A user may come to wrong conclusions about the number of rented bikes
+depending on the weather conditions of the day.
+The proposed method enables the user to make quantitative statements
+as if he was using a linear model
+while preserving the non-linear, non-monotonic relationship where necessary.
+Thus, he can combine a better performing model with a comprehensible interpretation.
+The results for the gradient boosting model are less convincing.
+Due to the stepped response function the model is less appropriate
+for making quantitative statements about the feature effect.
+The estimates fluctuate between high values and values close to zero.&lt;/p&gt;
+
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:bikes-results-svm&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;figures/bikes-results-svm-1.png&#34; alt=&#34;Bike sharing data. Results SVM.&#34; width=&#34;1152&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: Bike sharing data. Results SVM.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:bikes-results-gbm&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;figures/bikes-results-gbm-1.png&#34; alt=&#34;Bike sharing data. Results gradient boosting.&#34; width=&#34;1152&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: Bike sharing data. Results gradient boosting.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:bikes-results-rf&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;figures/bikes-results-rf-1.png&#34; alt=&#34;Bike sharing data. Results random forest.&#34; width=&#34;1152&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 4: Bike sharing data. Results random forest.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-package&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R package&lt;/h1&gt;
+&lt;p&gt;The method is implemented in &lt;strong&gt;R&lt;/strong&gt; supporting a variety of models out of the box.
+Source code and more information can be found on GitHub:
+&lt;a href=&#34;https://github.com/BodoBurger/intame&#34; class=&#34;uri&#34;&gt;https://github.com/BodoBurger/intame&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-R-randomForest&#34;&gt;
+&lt;p&gt;Breiman, Leo, Adele Cutler, Andy Liaw, and Matthew Wiener. 2018. &lt;em&gt;RandomForest: Breiman and Cutler’s Random Forests for Classification and Regression&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=randomForest&#34;&gt;https://CRAN.R-project.org/package=randomForest&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-fanaee2013event&#34;&gt;
+&lt;p&gt;Fanaee-T, Hadi, and Joao Gama. 2013. “Event Labeling Combining Ensemble Detectors and Background Knowledge.” &lt;em&gt;Progress in Artificial Intelligence&lt;/em&gt;. Springer Berlin Heidelberg, 1–15. &lt;a href=&#34;https://doi.org/10.1007/s13748-013-0040-3&#34;&gt;https://doi.org/10.1007/s13748-013-0040-3&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-gbm&#34;&gt;
+&lt;p&gt;Greenwell, Brandon, Bradley Boehmke, Jay Cunningham, and GBM Developers. 2019. &lt;em&gt;Gbm: Generalized Boosted Regression Models&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=gbm&#34;&gt;https://CRAN.R-project.org/package=gbm&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-e1071&#34;&gt;
+&lt;p&gt;Meyer, David, Evgenia Dimitriadou, Kurt Hornik, Andreas Weingessel, and Friedrich Leisch. 2019. &lt;em&gt;E1071: Misc Functions of the Department of Statistics, Probability Theory Group (Formerly: E1071), Tu Wien&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=e1071&#34;&gt;https://CRAN.R-project.org/package=e1071&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-molnar2018interpretable&#34;&gt;
+&lt;p&gt;Molnar, Christoph. 2018. &lt;em&gt;Interpretable Machine Learning - a Guide for Making Black Box Models Explainable&lt;/em&gt;. Creative Commons. &lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/&#34;&gt;https://christophm.github.io/interpretable-ml-book/&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-base&#34;&gt;
+&lt;p&gt;R Core Team. 2019. &lt;em&gt;R: A Language and Environment for Statistical Computing&lt;/em&gt;. Vienna, Austria: R Foundation for Statistical Computing. &lt;a href=&#34;https://www.R-project.org/&#34;&gt;https://www.R-project.org/&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Interpretable Machine Learning by Christoph Molnar</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/post/2019-02-interpretable-ml-book/</link>
+      <pubDate>Tue, 26 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/post/2019-02-interpretable-ml-book/</guid>
+      <description>
+
+
+&lt;p&gt;The digital version of the book can be bought on
+&lt;a href=&#34;https://leanpub.com/interpretable-machine-learning&#34;&gt;leanpub&lt;/a&gt;.
+You can find a free online version of the book here:
+&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book&#34; class=&#34;uri&#34;&gt;https://christophm.github.io/interpretable-ml-book&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The introduction covers three short stories that illustrate the detrimental consequences of
+a world controlled by black box machine learning models
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/storytime.html&#34;&gt;1.1&lt;/a&gt;).
+They serve as motivation for why we want to use methods
+that improve understanding of an opaque model.
+The goal is that a human can understand a model
+so that he can consistently predict its results.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/interpretability.html&#34;&gt;Chapter 2&lt;/a&gt;
+lays the foundation for the discussion on machine learning interpretability
+by answering the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Why is interpretation important and when do we need it
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/interpretability-importance.html&#34;&gt;2.1&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;How can we classify different interpretation methods
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/taxonomy-of-interpretability-methods.html&#34;&gt;2.2&lt;/a&gt;)?
+&lt;ul&gt;
+&lt;li&gt;intrinsic vs post-hoc methods&lt;/li&gt;
+&lt;li&gt;result of the method&lt;/li&gt;
+&lt;li&gt;model-specific vs model-agnostic&lt;/li&gt;
+&lt;li&gt;local vs global&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Which part of a model do we want to inspect
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/scope-of-interpretability.html&#34;&gt;2.3&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;How do we evaluate the interpretation
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/evaluation-of-interpretability.html&#34;&gt;2.4&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;What does a human need to know to understand a black box model
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/explanation.html&#34;&gt;2.6&lt;/a&gt;)?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The presented interpretation methods are repeatedly applied to three freely available data sets
+representing different kinds of prediction tasks:
+&lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset&#34;&gt;daily bike rentals&lt;/a&gt; (regression),
+&lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Cervical+cancer+%28Risk+Factors%29&#34;&gt;cancer risk factors&lt;/a&gt; (classification) and
+&lt;a href=&#34;dcomp.sor.ufscar.br/talmeida/youtubespamcollection/&#34;&gt;YouTube spam comments&lt;/a&gt; (text classification).
+&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/data.html&#34;&gt;Chapter 3&lt;/a&gt;
+introduces the datasets in more detail.&lt;/p&gt;
+&lt;div id=&#34;interpretable-models&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Interpretable models&lt;/h2&gt;
+&lt;p&gt;This chapter presents models that are interpretable by itself.
+For Molnar these are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;linear regression&lt;/li&gt;
+&lt;li&gt;logistic regression&lt;/li&gt;
+&lt;li&gt;decision trees&lt;/li&gt;
+&lt;li&gt;decision rules&lt;/li&gt;
+&lt;li&gt;RuleFit (&lt;a href=&#34;http://statweb.stanford.edu/~jhf/ftp/RuleFit.pdf&#34;&gt;Friedman and Popescu, 2005&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;naive Bayes&lt;/li&gt;
+&lt;li&gt;k-nearest neighbors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These models have in common that the result is accessible to the user without further steps.
+They differ in regards to linearity, monotonicity,
+the possibility to include feature interactions and
+the tasks they can handle.&lt;/p&gt;
+&lt;p&gt;The interpretation of linear regression is straightforward.
+We compute a coefficient (or a weight in ML terminology) for each feature
+that tells us how much the predicted target increases
+if we increase the corresponding feature by one unit, all other features held constant.
+(Effect plots)[&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation&#34; class=&#34;uri&#34;&gt;https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation&lt;/a&gt;]
+can help to understand a feature’s contribution to the prediction.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

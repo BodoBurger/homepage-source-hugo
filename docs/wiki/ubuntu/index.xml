@@ -61,10 +61,11 @@ BrowseRemoteProtocols none
 
 &lt;ul&gt;
 &lt;li&gt;chromium-browser&lt;/li&gt;
-&lt;li&gt;TexLive &lt;code&gt;sudo apt install texlive-full&lt;/code&gt; (4GB)&lt;/li&gt;
-&lt;li&gt;R (&lt;a href=&#34;https://bodoburger.github.io/homepage-source-hugo/homepage-source-hugo/wiki/ubuntu/r-stats/&#34; target=&#34;_blank&#34;&gt;more info&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;TexLive: &lt;code&gt;sudo apt install texlive-full&lt;/code&gt; (4GB)&lt;/li&gt;
+&lt;li&gt;R (&lt;a href=&#34;../r-stats&#34;&gt;more info&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Scribus&lt;/li&gt;
 &lt;li&gt;VLC&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.darktable.org/install&#34; target=&#34;_blank&#34;&gt;darktable&lt;/a&gt;: &lt;code&gt;bash sudo apt install darktable&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Snap
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Books | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/categories/books/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/categories/books/index.xml" rel="self" type="application/rss+xml" />
+    <description>Books</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Tue, 26 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>Books</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/categories/books/</link>
+    </image>
+    
+    <item>
+      <title>Interpretable Machine Learning by Christoph Molnar</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/post/2019-02-interpretable-ml-book/</link>
+      <pubDate>Tue, 26 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/post/2019-02-interpretable-ml-book/</guid>
+      <description>
+
+
+&lt;p&gt;The digital version of the book can be bought on
+&lt;a href=&#34;https://leanpub.com/interpretable-machine-learning&#34;&gt;leanpub&lt;/a&gt;.
+You can find a free online version of the book here:
+&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book&#34; class=&#34;uri&#34;&gt;https://christophm.github.io/interpretable-ml-book&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The introduction covers three short stories that illustrate the detrimental consequences of
+a world controlled by black box machine learning models
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/storytime.html&#34;&gt;1.1&lt;/a&gt;).
+They serve as motivation for why we want to use methods
+that improve understanding of an opaque model.
+The goal is that a human can understand a model
+so that he can consistently predict its results.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/interpretability.html&#34;&gt;Chapter 2&lt;/a&gt;
+lays the foundation for the discussion on machine learning interpretability
+by answering the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Why is interpretation important and when do we need it
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/interpretability-importance.html&#34;&gt;2.1&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;How can we classify different interpretation methods
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/taxonomy-of-interpretability-methods.html&#34;&gt;2.2&lt;/a&gt;)?
+&lt;ul&gt;
+&lt;li&gt;intrinsic vs post-hoc methods&lt;/li&gt;
+&lt;li&gt;result of the method&lt;/li&gt;
+&lt;li&gt;model-specific vs model-agnostic&lt;/li&gt;
+&lt;li&gt;local vs global&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Which part of a model do we want to inspect
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/scope-of-interpretability.html&#34;&gt;2.3&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;How do we evaluate the interpretation
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/evaluation-of-interpretability.html&#34;&gt;2.4&lt;/a&gt;)?&lt;/li&gt;
+&lt;li&gt;What does a human need to know to understand a black box model
+(&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/explanation.html&#34;&gt;2.6&lt;/a&gt;)?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The presented interpretation methods are repeatedly applied to three freely available data sets
+representing different kinds of prediction tasks:
+&lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset&#34;&gt;daily bike rentals&lt;/a&gt; (regression),
+&lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Cervical+cancer+%28Risk+Factors%29&#34;&gt;cancer risk factors&lt;/a&gt; (classification) and
+&lt;a href=&#34;dcomp.sor.ufscar.br/talmeida/youtubespamcollection/&#34;&gt;YouTube spam comments&lt;/a&gt; (text classification).
+&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/data.html&#34;&gt;Chapter 3&lt;/a&gt;
+introduces the datasets in more detail.&lt;/p&gt;
+&lt;div id=&#34;interpretable-models&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Interpretable models&lt;/h2&gt;
+&lt;p&gt;This chapter presents models that are interpretable by itself.
+For Molnar these are&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;linear regression&lt;/li&gt;
+&lt;li&gt;logistic regression&lt;/li&gt;
+&lt;li&gt;decision trees&lt;/li&gt;
+&lt;li&gt;decision rules&lt;/li&gt;
+&lt;li&gt;RuleFit (&lt;a href=&#34;http://statweb.stanford.edu/~jhf/ftp/RuleFit.pdf&#34;&gt;Friedman and Popescu, 2005&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;naive Bayes&lt;/li&gt;
+&lt;li&gt;k-nearest neighbors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These models have in common that the result is accessible to the user without further steps.
+They differ in regards to linearity, monotonicity,
+the possibility to include feature interactions and
+the tasks they can handle.&lt;/p&gt;
+&lt;p&gt;The interpretation of linear regression is straightforward.
+We compute a coefficient (or a weight in ML terminology) for each feature
+that tells us how much the predicted target increases
+if we increase the corresponding feature by one unit, all other features held constant.
+(Effect plots)[&lt;a href=&#34;https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation&#34; class=&#34;uri&#34;&gt;https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation&lt;/a&gt;]
+can help to understand a feature’s contribution to the prediction.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

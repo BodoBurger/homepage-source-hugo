@@ -21,10 +21,34 @@
     </item>
     
     <item>
+      <title>Interpretable ML</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/interpretable-ml/</link>
+      <pubDate>Sat, 06 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/interpretable-ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/machine-learning/</link>
+      <pubDate>Sat, 06 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>r-stats</title>
       <link>https://bodoburger.github.io/homepage-source-hugo/tags/r-stats/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 06 Apr 2019 00:00:00 +0000</pubDate>
       <guid>https://bodoburger.github.io/homepage-source-hugo/tags/r-stats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>explainable AI</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/explainable-ai/</link>
+      <pubDate>Tue, 26 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/explainable-ai/</guid>
       <description></description>
     </item>
     
@@ -37,18 +61,42 @@
     </item>
     
     <item>
+      <title>Health Sector</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/health-sector/</link>
+      <pubDate>Fri, 07 Apr 2017 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/health-sector/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Artificial Intelligence</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/artificial-intelligence/</link>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/artificial-intelligence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Deep Learning</title>
       <link>https://bodoburger.github.io/homepage-source-hugo/tags/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
       <guid>https://bodoburger.github.io/homepage-source-hugo/tags/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Demo</title>
-      <link>https://bodoburger.github.io/homepage-source-hugo/tags/demo/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/demo/</guid>
+      <title>Neural Networks</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/neural-networks/</link>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/neural-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Economics</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/economics/</link>
+      <pubDate>Tue, 26 Aug 2014 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/tags/economics/</guid>
       <description></description>
     </item>
     

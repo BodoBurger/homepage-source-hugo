@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Economics | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/tags/economics/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/tags/economics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Economics</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Tue, 26 Aug 2014 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>Economics</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/tags/economics/</link>
+    </image>
+    
+    <item>
+      <title>German Healthcare System - Risk Selection and Two-tier Medicine</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/project/2014-german-healthcare-system/</link>
+      <pubDate>Tue, 26 Aug 2014 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/project/2014-german-healthcare-system/</guid>
+      <description>&lt;p&gt;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Measuring the effects of a general minimum wage</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/project/2013-minimum-wages/</link>
+      <pubDate>Tue, 26 Aug 2014 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/project/2013-minimum-wages/</guid>
+      <description>&lt;p&gt;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table1.png&#34; &gt;
+
+&lt;img src=&#34;table1.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table2.png&#34; &gt;
+
+&lt;img src=&#34;table2.png&#34; alt=&#34;&#34; &gt;
+&lt;/a&gt;
+
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+  </channel>
+</rss>

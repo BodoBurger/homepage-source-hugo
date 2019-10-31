@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tutorials | Bodo Burger</title>
+    <link>https://bodoburger.github.io/homepage-source-hugo/categories/tutorials/</link>
+      <atom:link href="https://bodoburger.github.io/homepage-source-hugo/categories/tutorials/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tutorials</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Bodo Burger 2019</copyright><lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://bodoburger.github.io/homepage-source-hugo/img/icon-192.png</url>
+      <title>Tutorials</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/categories/tutorials/</link>
+    </image>
+    
+    <item>
+      <title>Use R and Google Sheets to calculate a Nutrition Table</title>
+      <link>https://bodoburger.github.io/homepage-source-hugo/post/2019-04-nutrition-table-google-sheets/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://bodoburger.github.io/homepage-source-hugo/post/2019-04-nutrition-table-google-sheets/</guid>
+      <description>
+
+
+&lt;p&gt;I recently stumbled upon this
+&lt;a href=&#34;https://greenysherry.com/life-changing-brot-mit-nuessen-nach-my-new-roots-glutenfrei-vegan/&#34;&gt;bread recipe&lt;/a&gt;.
+It’s quickly prepared, tastes great and is full of valuable ingredients
+(only oats, nuts and seeds, no flour).
+However, being a homemade bread it does not come with a nutrition table.
+The following shows an easy way to create one.&lt;/p&gt;
+&lt;p&gt;First, we put the recipe and the nutrional values of each ingredient into
+two spreadsheets
+(&lt;a href=&#34;https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E&#34;&gt;recipe&lt;/a&gt; and &lt;a href=&#34;https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk&#34;&gt;food stats&lt;/a&gt;).
+We combine these using &lt;strong&gt;R&lt;/strong&gt; to get the nutrition table.
+As a bonus, we can calculate the price of the recipe.&lt;/p&gt;
+&lt;div id=&#34;using-the-gsheet-package&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Using the &lt;em&gt;gsheet&lt;/em&gt; package&lt;/h2&gt;
+&lt;p&gt;A simple way to import Google Sheets to &lt;strong&gt;R&lt;/strong&gt; is the
+&lt;a href=&#34;https://cran.r-project.org/package=gsheet&#34;&gt;gsheet&lt;/a&gt; package.
+We only need to supply the sharing link.
+It returns a &lt;a href=&#34;https://tibble.tidyverse.org/&#34;&gt;tibble&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;food_stats = gsheet::gsheet2tbl(&amp;quot;https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk&amp;quot;)
+
+recipes = gsheet::gsheet2tbl(&amp;quot;https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;food_stats&lt;/em&gt; contains more ingredients than we need for our bread recipe.
+So when we merge both data frames we only want to keep the rows
+that contain the ingredients of the recipe.
+This is done by &lt;em&gt;left_join()&lt;/em&gt; from the
+&lt;a href=&#34;https://cran.r-project.org/package=dplyr&#34;&gt;dplyr&lt;/a&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+bread_ingredients = left_join(recipes, food_stats, &amp;quot;Description&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quantities = select(bread_ingredients, &amp;quot;Quantity (gr)&amp;quot;)[[1]]
+
+nutr_vals = bread_ingredients %&amp;gt;% select(-one_of(c(&amp;quot;Other.x&amp;quot;, &amp;quot;Other.y&amp;quot;,
+  &amp;quot;Quantity (gr)&amp;quot;, &amp;quot;Description&amp;quot;, &amp;quot;Full Description&amp;quot;, &amp;quot;Salt&amp;quot;))) %&amp;gt;%
+  select(-contains(&amp;quot;Energy&amp;quot;)) %&amp;gt;%
+  select(-one_of(&amp;quot;Price (€)&amp;quot;)) %&amp;gt;% select(-contains(&amp;quot;Packaging&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Nutrional values / 100g:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;colSums(nutr_vals * quantities) / sum(quantities)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Calories (kcal)       Total Fat   Saturated Fat     Total Carbs 
+##              NA              NA              NA              NA 
+##           Sugar   Dietary Fiber         Protein 
+##              NA              NA              NA&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Draft&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Next step: download stats via nutrition database API.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

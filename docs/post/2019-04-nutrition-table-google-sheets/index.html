@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="I recently stumbled upon this bread recipe. It&rsquo;s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.
+  <meta name="description" content="I recently stumbled upon this bread recipe. It’s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.
 First, we put the recipe and the nutrional values of each ingredient into two spreadsheets (recipe and food stats). We combine these using R to get the nutrition table.">
 
   
@@ -115,14 +115,14 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
   <meta property="og:site_name" content="Bodo Burger">
   <meta property="og:url" content="https://bodoburger.github.io/homepage-source-hugo/post/2019-04-nutrition-table-google-sheets/">
   <meta property="og:title" content="Use R and Google Sheets to calculate a Nutrition Table | Bodo Burger">
-  <meta property="og:description" content="I recently stumbled upon this bread recipe. It&rsquo;s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.
+  <meta property="og:description" content="I recently stumbled upon this bread recipe. It’s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.
 First, we put the recipe and the nutrional values of each ingredient into two spreadsheets (recipe and food stats). We combine these using R to get the nutrition table."><meta property="og:image" content="https://bodoburger.github.io/homepage-source-hugo/post/2019-04-nutrition-table-google-sheets/featured.jpg">
   <meta property="twitter:image" content="https://bodoburger.github.io/homepage-source-hugo/post/2019-04-nutrition-table-google-sheets/featured.jpg"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-04-01T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-10-25T00:11:41&#43;02:00">
+    <meta property="article:modified_time" content="2019-04-01T00:00:00&#43;00:00">
   
 
   
@@ -168,7 +168,7 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
   ],
   
   "datePublished": "2019-04-01T00:00:00Z",
-  "dateModified": "2019-10-25T00:11:41+02:00",
+  "dateModified": "2019-04-01T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -183,7 +183,7 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
       "url": "https://bodoburger.github.io/homepage-source-hugo/img/icon-512.png"
     }
   },
-  "description": "I recently stumbled upon this bread recipe. It\u0026rsquo;s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.\nFirst, we put the recipe and the nutrional values of each ingredient into two spreadsheets (recipe and food stats). We combine these using R to get the nutrition table."
+  "description": "I recently stumbled upon this bread recipe. It’s quickly prepared, tastes great and is full of valuable ingredients (only oats, nuts and seeds, no flour). However, being a homemade bread it does not come with a nutrition table. The following shows an easy way to create one.\nFirst, we put the recipe and the nutrional values of each ingredient into two spreadsheets (recipe and food stats). We combine these using R to get the nutrition table."
 }
 </script>
 
@@ -288,26 +288,6 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
         
         
         
-
-        
-        
-        
-        
-        
-        
-
-        <li class="nav-item">
-          <a class="nav-link  active" href="/homepage-source-hugo/post"><span>Blog</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
           
         
 
@@ -319,7 +299,27 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/homepage-source-hugo/project/"><span>Projects</span></a>
+          <a class="nav-link " href="/homepage-source-hugo/projects/"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/homepage-source-hugo/post"><span>Blog</span></a>
         </li>
 
         
@@ -457,10 +457,8 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
     
     
       
-          Last updated on
-      
     
-    2019-10-25
+    2019-04-01
   </span>
   
 
@@ -481,7 +479,7 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/homepage-source-hugo/categories/tutorial/">tutorial</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/homepage-source-hugo/categories/tutorials/">Tutorials</a></span>
   
 
   
@@ -607,69 +605,59 @@ First, we put the recipe and the nutrional values of each ingredient into two sp
     <div class="article-style">
       
 
-<p>I recently stumbled upon this <a href="https://greenysherry.com/life-changing-brot-mit-nuessen-nach-my-new-roots-glutenfrei-vegan/" target="_blank">bread
-recipe</a>.
-It&rsquo;s quickly prepared, tastes great and is full of valuable ingredients
-(only oats, nuts and seeds, no flour). However, being a homemade bread
-it does not come with a nutrition table. The following shows an easy way
-to create one.</p>
 
-<p>First, we put the recipe and the nutrional values of each ingredient
-into two spreadsheets
-(<a href="https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E" target="_blank">recipe</a>
-and <a href="https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk" target="_blank">food
-stats</a>).
-We combine these using <strong>R</strong> to get the nutrition table. As a bonus, we
-can calculate the price of the recipe.</p>
-
-<h2 id="using-the-gsheet-package">Using the <em>gsheet</em> package</h2>
-
+<p>I recently stumbled upon this
+<a href="https://greenysherry.com/life-changing-brot-mit-nuessen-nach-my-new-roots-glutenfrei-vegan/">bread recipe</a>.
+It’s quickly prepared, tastes great and is full of valuable ingredients
+(only oats, nuts and seeds, no flour).
+However, being a homemade bread it does not come with a nutrition table.
+The following shows an easy way to create one.</p>
+<p>First, we put the recipe and the nutrional values of each ingredient into
+two spreadsheets
+(<a href="https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E">recipe</a> and <a href="https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk">food stats</a>).
+We combine these using <strong>R</strong> to get the nutrition table.
+As a bonus, we can calculate the price of the recipe.</p>
+<div id="using-the-gsheet-package" class="section level2">
+<h2>Using the <em>gsheet</em> package</h2>
 <p>A simple way to import Google Sheets to <strong>R</strong> is the
-<a href="https://cran.r-project.org/package=gsheet" target="_blank">gsheet</a> package. We only
-need to supply the sharing link. It returns a
-<a href="https://tibble.tidyverse.org/" target="_blank">tibble</a>.</p>
+<a href="https://cran.r-project.org/package=gsheet">gsheet</a> package.
+We only need to supply the sharing link.
+It returns a <a href="https://tibble.tidyverse.org/">tibble</a>.</p>
+<pre class="r"><code>food_stats = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk&quot;)
 
-<pre><code class="language-.r">food_stats = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk&quot;)
-
-recipes = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E&quot;)
-</code></pre>
-
-<p><em>food_stats</em> contains more ingredients than we need for our bread
-recipe. So when we merge both data frames we only want to keep the rows
-that contain the ingredients of the recipe. This is done by
-<em>left_join()</em> from the
-<a href="https://cran.r-project.org/package=dplyr" target="_blank">dplyr</a> package.</p>
-
-<pre><code class="language-.r">library(dplyr)
-bread_ingredients = left_join(recipes, food_stats, &quot;Description&quot;)
-</code></pre>
-
-<pre><code class="language-.r">quantities = select(bread_ingredients, &quot;Quantity (gr)&quot;)[[1]]
+recipes = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E&quot;)</code></pre>
+<p><em>food_stats</em> contains more ingredients than we need for our bread recipe.
+So when we merge both data frames we only want to keep the rows
+that contain the ingredients of the recipe.
+This is done by <em>left_join()</em> from the
+<a href="https://cran.r-project.org/package=dplyr">dplyr</a> package.</p>
+<pre class="r"><code>library(dplyr)
+bread_ingredients = left_join(recipes, food_stats, &quot;Description&quot;)</code></pre>
+<pre class="r"><code>quantities = select(bread_ingredients, &quot;Quantity (gr)&quot;)[[1]]
 
 nutr_vals = bread_ingredients %&gt;% select(-one_of(c(&quot;Other.x&quot;, &quot;Other.y&quot;,
   &quot;Quantity (gr)&quot;, &quot;Description&quot;, &quot;Full Description&quot;, &quot;Salt&quot;))) %&gt;%
   select(-contains(&quot;Energy&quot;)) %&gt;%
-  select(-one_of(&quot;Price (€)&quot;)) %&gt;% select(-contains(&quot;Packaging&quot;))
-</code></pre>
-
+  select(-one_of(&quot;Price (€)&quot;)) %&gt;% select(-contains(&quot;Packaging&quot;))</code></pre>
 <p><strong>Nutrional values / 100g:</strong></p>
-
-<pre><code class="language-.r">colSums(nutr_vals * quantities) / sum(quantities)
-</code></pre>
-
+<pre class="r"><code>colSums(nutr_vals * quantities) / sum(quantities)</code></pre>
 <pre><code>## Calories (kcal)       Total Fat   Saturated Fat     Total Carbs 
 ##              NA              NA              NA              NA 
 ##           Sugar   Dietary Fiber         Protein 
-##              NA              NA              NA
-</code></pre>
-
+##              NA              NA              NA</code></pre>
 <p><em>Draft</em></p>
-
 <p>Next step: download stats via nutrition database API.</p>
+</div>
 
     </div>
 
     
+<p class="edit-page">
+  <a href="https://github.com/BodoBurger/homepage-source-hugo/edit/master/content/post/2019-04-nutrition-table-google-sheets/index.html">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
 
 
     
@@ -750,8 +738,8 @@ nutr_vals = bread_ingredients %&gt;% select(-one_of(c(&quot;Other.x&quot;, &quot
             
           
           <li>
-            <a href="https://twitter.com/bododata" target="_blank" rel="noopener">
-              <i class="fab fa-twitter"></i>
+            <a href="https://github.com/bodoburger" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
             </a>
           </li>
         
@@ -767,8 +755,25 @@ nutr_vals = bread_ingredients %&gt;% select(-one_of(c(&quot;Other.x&quot;, &quot
             
           
           <li>
-            <a href="https://github.com/bodoburger" target="_blank" rel="noopener">
-              <i class="fab fa-github"></i>
+            <a href="https://linkedin.com/in/bodoburger" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://twitter.com/bododata" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
             </a>
           </li>
         
