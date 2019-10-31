@@ -1,0 +1,54 @@
+---
+title: Use R and Google Sheets to calculate a Nutrition Table
+authors:
+  - admin
+date: "2019-04-01"
+tags: ["r-stats"]
+categories: ["Tutorials"]
+draft: false
+---
+
+
+
+<p>I recently stumbled upon this
+<a href="https://greenysherry.com/life-changing-brot-mit-nuessen-nach-my-new-roots-glutenfrei-vegan/">bread recipe</a>.
+It’s quickly prepared, tastes great and is full of valuable ingredients
+(only oats, nuts and seeds, no flour).
+However, being a homemade bread it does not come with a nutrition table.
+The following shows an easy way to create one.</p>
+<p>First, we put the recipe and the nutrional values of each ingredient into
+two spreadsheets
+(<a href="https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E">recipe</a> and <a href="https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk">food stats</a>).
+We combine these using <strong>R</strong> to get the nutrition table.
+As a bonus, we can calculate the price of the recipe.</p>
+<div id="using-the-gsheet-package" class="section level2">
+<h2>Using the <em>gsheet</em> package</h2>
+<p>A simple way to import Google Sheets to <strong>R</strong> is the
+<a href="https://cran.r-project.org/package=gsheet">gsheet</a> package.
+We only need to supply the sharing link.
+It returns a <a href="https://tibble.tidyverse.org/">tibble</a>.</p>
+<pre class="r"><code>food_stats = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1qgo8Yefb5nx5PVElZvmf6nSDI6RfN2ofd8CeMuSklHk&quot;)
+
+recipes = gsheet::gsheet2tbl(&quot;https://docs.google.com/spreadsheets/d/1C0AwjQYrudrV3ZLgQJZnCr9La7OVftRTZn3QKMrJx5E&quot;)</code></pre>
+<p><em>food_stats</em> contains more ingredients than we need for our bread recipe.
+So when we merge both data frames we only want to keep the rows
+that contain the ingredients of the recipe.
+This is done by <em>left_join()</em> from the
+<a href="https://cran.r-project.org/package=dplyr">dplyr</a> package.</p>
+<pre class="r"><code>library(dplyr)
+bread_ingredients = left_join(recipes, food_stats, &quot;Description&quot;)</code></pre>
+<pre class="r"><code>quantities = select(bread_ingredients, &quot;Quantity (gr)&quot;)[[1]]
+
+nutr_vals = bread_ingredients %&gt;% select(-one_of(c(&quot;Other.x&quot;, &quot;Other.y&quot;,
+  &quot;Quantity (gr)&quot;, &quot;Description&quot;, &quot;Full Description&quot;, &quot;Salt&quot;))) %&gt;%
+  select(-contains(&quot;Energy&quot;)) %&gt;%
+  select(-one_of(&quot;Price (€)&quot;)) %&gt;% select(-contains(&quot;Packaging&quot;))</code></pre>
+<p><strong>Nutrional values / 100g:</strong></p>
+<pre class="r"><code>colSums(nutr_vals * quantities) / sum(quantities)</code></pre>
+<pre><code>## Calories (kcal)       Total Fat   Saturated Fat     Total Carbs 
+##              NA              NA              NA              NA 
+##           Sugar   Dietary Fiber         Protein 
+##              NA              NA              NA</code></pre>
+<p><em>Draft</em></p>
+<p>Next step: download stats via nutrition database API.</p>
+</div>

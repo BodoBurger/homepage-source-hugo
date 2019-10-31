@@ -1,0 +1,74 @@
+---
+title: Interpretable Machine Learning by Christoph Molnar
+author: "Bodo Burger"
+date: "2019-02-26"
+tags: ["Interpretable ML", "explainable AI"]
+categories: ["Books"]
+draft: False
+---
+
+
+
+<p>The digital version of the book can be bought on
+<a href="https://leanpub.com/interpretable-machine-learning">leanpub</a>.
+You can find a free online version of the book here:
+<a href="https://christophm.github.io/interpretable-ml-book" class="uri">https://christophm.github.io/interpretable-ml-book</a></p>
+<p>The introduction covers three short stories that illustrate the detrimental consequences of
+a world controlled by black box machine learning models
+(<a href="https://christophm.github.io/interpretable-ml-book/storytime.html">1.1</a>).
+They serve as motivation for why we want to use methods
+that improve understanding of an opaque model.
+The goal is that a human can understand a model
+so that he can consistently predict its results.</p>
+<p><a href="https://christophm.github.io/interpretable-ml-book/interpretability.html">Chapter 2</a>
+lays the foundation for the discussion on machine learning interpretability
+by answering the following questions:</p>
+<ul>
+<li>Why is interpretation important and when do we need it
+(<a href="https://christophm.github.io/interpretable-ml-book/interpretability-importance.html">2.1</a>)?</li>
+<li>How can we classify different interpretation methods
+(<a href="https://christophm.github.io/interpretable-ml-book/taxonomy-of-interpretability-methods.html">2.2</a>)?
+<ul>
+<li>intrinsic vs post-hoc methods</li>
+<li>result of the method</li>
+<li>model-specific vs model-agnostic</li>
+<li>local vs global</li>
+</ul></li>
+<li>Which part of a model do we want to inspect
+(<a href="https://christophm.github.io/interpretable-ml-book/scope-of-interpretability.html">2.3</a>)?</li>
+<li>How do we evaluate the interpretation
+(<a href="https://christophm.github.io/interpretable-ml-book/evaluation-of-interpretability.html">2.4</a>)?</li>
+<li>What does a human need to know to understand a black box model
+(<a href="https://christophm.github.io/interpretable-ml-book/explanation.html">2.6</a>)?</li>
+</ul>
+<p>The presented interpretation methods are repeatedly applied to three freely available data sets
+representing different kinds of prediction tasks:
+<a href="http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset">daily bike rentals</a> (regression),
+<a href="https://archive.ics.uci.edu/ml/datasets/Cervical+cancer+%28Risk+Factors%29">cancer risk factors</a> (classification) and
+<a href="dcomp.sor.ufscar.br/talmeida/youtubespamcollection/">YouTube spam comments</a> (text classification).
+<a href="https://christophm.github.io/interpretable-ml-book/data.html">Chapter 3</a>
+introduces the datasets in more detail.</p>
+<div id="interpretable-models" class="section level2">
+<h2>Interpretable models</h2>
+<p>This chapter presents models that are interpretable by itself.
+For Molnar these are</p>
+<ul>
+<li>linear regression</li>
+<li>logistic regression</li>
+<li>decision trees</li>
+<li>decision rules</li>
+<li>RuleFit (<a href="http://statweb.stanford.edu/~jhf/ftp/RuleFit.pdf">Friedman and Popescu, 2005</a>)</li>
+<li>naive Bayes</li>
+<li>k-nearest neighbors</li>
+</ul>
+<p>These models have in common that the result is accessible to the user without further steps.
+They differ in regards to linearity, monotonicity,
+the possibility to include feature interactions and
+the tasks they can handle.</p>
+<p>The interpretation of linear regression is straightforward.
+We compute a coefficient (or a weight in ML terminology) for each feature
+that tells us how much the predicted target increases
+if we increase the corresponding feature by one unit, all other features held constant.
+(Effect plots)[<a href="https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation" class="uri">https://christophm.github.io/interpretable-ml-book/limo.html#visual-interpretation</a>]
+can help to understand a feature’s contribution to the prediction.</p>
+</div>

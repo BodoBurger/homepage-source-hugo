@@ -1,0 +1,374 @@
+---
+title: "Feature Effects in Machine Learning Models"
+author: "Bodo Burger"
+date: '2019-04-06'
+output:
+  blogdown::html_page:
+    toc: yes
+    number_sections: false
+links:
+- icon: github
+  icon_pack: fab
+  name: R package source
+  url: https://github.com/BodoBurger/intame
+image:
+  caption: null
+  focal_point: Smart
+summary: I estimate interval-based feature effects in supervised learning models to
+  improve interpretability of black box models.
+tags:
+- Interpretable ML
+- Machine Learning
+- r-stats
+bibliography:
+- references.bib
+- packages.bib
+url_code: ''
+url_pdf: ''
+url_slides: ''
+url_video: ''
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#example-bike-sharing-data">Example: Bike Sharing Data</a><ul>
+<li><a href="#model-training">Model Training</a></li>
+<li><a href="#analysis">Analysis</a></li>
+</ul></li>
+<li><a href="#r-package">R package</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>Supervised machine learning models are mostly black boxes.
+The method I propose in my Master’s thesis tries to improve understanding of these black boxes.
+The goal is to find a way to quantify effect sizes of features.
+Average marginal effects are used in social sciences
+to determine effect sizes of logistic regression models.
+Applying this method to a machine learning model usually does not
+adequately represent the non-convex, non-monotonic response function.
+There are graphical methods like partial dependence plots or accumulated local effect plots
+that visualize the response functions but do not offer a quantitative interpretation.
+First, we use one of the latter methods to identify intervals
+within the response function is relatively stable.
+Second, we report some estimate of the feature effect separately for each interval.
+Our method determines the number of necessary intervals automatically.</p>
+</div>
+<div id="example-bike-sharing-data" class="section level1">
+<h1>Example: Bike Sharing Data</h1>
+<p>The following examples shows
+how the method can help to understand heterogeneous feature effects.
+We apply the method to the Bike Sharing dataset <span class="citation">(Fanaee-T and Gama 2013)</span>
+which was further processed by <span class="citation">Molnar (2018)</span>.
+See table <a href="#tab:bikes-load-data">1</a> for an overview of all the features.
+The target <code>cnt</code> is the number of bicycles
+lent by a bicycle sharing company per day.
+The features comprise calendrical and meteorological information for each day.</p>
+<table>
+<caption><span id="tab:bikes-load-data">Table 1: </span>Excerpt of the Bike Sharing dataset</caption>
+<thead>
+<tr class="header">
+<th align="left">season</th>
+<th align="left">yr</th>
+<th align="left">mnth</th>
+<th align="left">holiday</th>
+<th align="left">weekday</th>
+<th align="left">weathersit</th>
+<th align="right">temp</th>
+<th align="right">hum</th>
+<th align="right">windspeed</th>
+<th align="right">cnt</th>
+<th align="right">days_since_2011</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">SAT</td>
+<td align="left">MISTY</td>
+<td align="right">8.18</td>
+<td align="right">80.6</td>
+<td align="right">10.8</td>
+<td align="right">985</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">SUN</td>
+<td align="left">MISTY</td>
+<td align="right">9.08</td>
+<td align="right">69.6</td>
+<td align="right">16.7</td>
+<td align="right">801</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">MON</td>
+<td align="left">GOOD</td>
+<td align="right">1.23</td>
+<td align="right">43.7</td>
+<td align="right">16.6</td>
+<td align="right">1349</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">TUE</td>
+<td align="left">GOOD</td>
+<td align="right">1.40</td>
+<td align="right">59.0</td>
+<td align="right">10.7</td>
+<td align="right">1562</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">WED</td>
+<td align="left">GOOD</td>
+<td align="right">2.67</td>
+<td align="right">43.7</td>
+<td align="right">12.5</td>
+<td align="right">1600</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">SPRING</td>
+<td align="left">2011</td>
+<td align="left">JAN</td>
+<td align="left">0</td>
+<td align="left">THU</td>
+<td align="left">GOOD</td>
+<td align="right">1.60</td>
+<td align="right">51.8</td>
+<td align="right">6.0</td>
+<td align="right">1606</td>
+<td align="right">5</td>
+</tr>
+</tbody>
+</table>
+<div id="model-training" class="section level2">
+<h2>Model Training</h2>
+<p>We use a linear model <span class="citation">(R Core Team 2019)</span>, an SVM <span class="citation">(Meyer et al. 2019)</span>,
+a random decision forest <span class="citation">(Breiman et al. 2018)</span> and gradient boosting <span class="citation">(Greenwell et al. 2019)</span>.
+We compare the performance of all models and the performance
+of predicting the mean for each observation on a hold-out test set
+(see table <a href="#tab:bikes-model-training">2</a>).
+The linear model performs relatively well
+but we can improve by using a more complex machine learning model
+even without extensive tuning.</p>
+<table>
+<caption><span id="tab:bikes-model-training">Table 2: </span>Mean squared error, root mean squared log error,
+and R squared for hold-out test set</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">mean(y)</th>
+<th align="right">lm</th>
+<th align="right">svm</th>
+<th align="right">rf</th>
+<th align="right">gbm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mse</td>
+<td align="right">3.75e+06</td>
+<td align="right">5.30e+05</td>
+<td align="right">4.33e+05</td>
+<td align="right">4.22e+05</td>
+<td align="right">4.12e+05</td>
+</tr>
+<tr class="even">
+<td>rmsle</td>
+<td align="right">5.93e-01</td>
+<td align="right">2.36e-01</td>
+<td align="right">2.44e-01</td>
+<td align="right">2.61e-01</td>
+<td align="right">2.30e-01</td>
+</tr>
+<tr class="odd">
+<td>rsq</td>
+<td align="right">0.00e+00</td>
+<td align="right">8.59e-01</td>
+<td align="right">8.85e-01</td>
+<td align="right">8.88e-01</td>
+<td align="right">8.90e-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>Now analyse how changing feature values influences
+the predicted number of bikes.
+We focus on the three numerical features <code>temp</code> (temperature in degree Celsius),
+<code>hum</code> (humidity in percent) and <code>windspeed</code> (in kilometers per hour).
+We apply our method to each of the complex models with default settings.
+The output in <code>R</code> looks as follows:</p>
+<pre><code>## lm:
+##      temp       hum windspeed 
+##      98.2     -13.7     -40.1
+## SVM (temp)
+## [-5.221, 19.26) [19.26, 32.498] 
+##          128.11            3.87 
+## SVM (hum)
+## [18.792, 56.792) [56.792, 93.957] 
+##             7.19           -32.71 
+## SVM (windspeed)
+## [2.834, 14.876)    [14.876, 34] 
+##           -22.7           -64.7 
+## RF (temp)
+## [-5.221, 20.278) [20.278, 32.498] 
+##            104.5            -62.7 
+## RF (hum)
+## [18.792, 64.667) [64.667, 93.957] 
+##            -1.18           -31.97 
+## RF (windspeed)
+##  [2.834, 18.417) [18.417, 24.251)     [24.251, 34] 
+##           -16.46           -78.30            -1.64 
+## GBM (temp)
+## [-5.221, 16.792) [16.792, 26.075) [26.075, 32.498] 
+##            124.2             13.9           -239.7 
+## GBM (hum)
+## [18.792, 64.667) [64.667, 83.792)  [83.792, 87.25)  [87.25, 93.957] 
+##            -3.86           -39.63          -227.00            91.19 
+## GBM (windspeed)
+##   [2.834, 8.584)  [8.584, 22.959) [22.959, 24.251)     [24.251, 34] 
+##        -5.32e+01        -1.85e+01        -5.04e+02         6.60e-14</code></pre>
+<p>The marginal effect of the linear model is equal to the model coefficients.
+So according to the model an increase of the temperature by 1° Celsius
+leads to a predicted increase of <span class="math inline">\(98.188\)</span>. rented bicycles per day.
+This seems plausible for an average day.
+The higher the temperature the more people are willing to go by bike.
+But one could easily imagine that a temperature rise on a hot day
+will make people less likely rent a bike to avoid physical exertion.
+This is exactly what the results of the complex models suggest.
+Below 20° the SVM predicts an increase of
+<span class="math inline">\(128.106\)</span>
+bikes per day for an additional degree Celsius.
+Above 20° the effect becomes negative and very small
+<span class="math inline">\((3.867)\)</span>.
+The results of the random forest show two cutoff points.
+At around 13° the positive marginal effect becomes smaller in size
+and above 25° the effect is negative.
+The effect for gradient boosting is partitioned into four intervals.
+The effect of the three intervals below 27° are positive,
+above 27° it is negative, similarly to the results of the other two models.
+However, the absolute values of the effect fluctuate substantially
+for gradient boosting.</p>
+<p>For humidity the linear model predicts a negative effect.
+For the SVM the effect is positive up to around 43%.
+Between 43% and 65% the effect is negative but smaller in size.
+Above 65% it is negative and
+four times bigger than in the previous interval.
+The results for the random forest and gradient boosting
+both show very small effects below roughly 65% humidity.
+Above this point both models predict a decrease of rented bicycles
+with rising humidity.
+The histogram (figure <a href="#fig:bikes-hum-hist">1</a>) explains
+why the effect for humidity is probably non-monotonic.
+Humidity usually is between 50% to 75%.
+Values outside this range indicate more extreme weather conditions.
+If uncommonly dry or wet air reduces people’s desire to ride a bike
+we will expect a positive effect on the number of rented bikes
+if humidity is below the familiar range, and a negative effect if it is above.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:bikes-hum-hist"></span>
+<img src="figures/bikes-hum-hist-1.png" alt="Histogram for feature humidity of the Bike Sharing dataset." width="40%" />
+<p class="caption">
+Figure 1: Histogram for feature <code>humidity</code> of the Bike Sharing dataset.
+</p>
+</div>
+<p>Wind makes cycling less attractive, so one associates higher wind speed
+with a reduced willingness to rent a bike.
+The linear model predicts a negative effect (<span class="math inline">\(-40.149\)</span>).
+For both SVM and random forest our method proposes a negative effect
+that is constant over the whole feature distribution.
+Consequently, in the case of wind speed a linear model seems to be appropriate
+to represent the relationship.
+Gradient boosting shows a negative effect for five intervals,
+the reported values are not very stable, again.</p>
+<p>In this exemplary application we showed that
+the linear model does not suffice to represent the varying response function types.
+A user may come to wrong conclusions about the number of rented bikes
+depending on the weather conditions of the day.
+The proposed method enables the user to make quantitative statements
+as if he was using a linear model
+while preserving the non-linear, non-monotonic relationship where necessary.
+Thus, he can combine a better performing model with a comprehensible interpretation.
+The results for the gradient boosting model are less convincing.
+Due to the stepped response function the model is less appropriate
+for making quantitative statements about the feature effect.
+The estimates fluctuate between high values and values close to zero.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:bikes-results-svm"></span>
+<img src="figures/bikes-results-svm-1.png" alt="Bike sharing data. Results SVM." width="1152" />
+<p class="caption">
+Figure 2: Bike sharing data. Results SVM.
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:bikes-results-gbm"></span>
+<img src="figures/bikes-results-gbm-1.png" alt="Bike sharing data. Results gradient boosting." width="1152" />
+<p class="caption">
+Figure 3: Bike sharing data. Results gradient boosting.
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:bikes-results-rf"></span>
+<img src="figures/bikes-results-rf-1.png" alt="Bike sharing data. Results random forest." width="1152" />
+<p class="caption">
+Figure 4: Bike sharing data. Results random forest.
+</p>
+</div>
+</div>
+</div>
+<div id="r-package" class="section level1">
+<h1>R package</h1>
+<p>The method is implemented in <strong>R</strong> supporting a variety of models out of the box.
+Source code and more information can be found on GitHub:
+<a href="https://github.com/BodoBurger/intame" class="uri">https://github.com/BodoBurger/intame</a></p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-R-randomForest">
+<p>Breiman, Leo, Adele Cutler, Andy Liaw, and Matthew Wiener. 2018. <em>RandomForest: Breiman and Cutler’s Random Forests for Classification and Regression</em>. <a href="https://CRAN.R-project.org/package=randomForest">https://CRAN.R-project.org/package=randomForest</a>.</p>
+</div>
+<div id="ref-fanaee2013event">
+<p>Fanaee-T, Hadi, and Joao Gama. 2013. “Event Labeling Combining Ensemble Detectors and Background Knowledge.” <em>Progress in Artificial Intelligence</em>. Springer Berlin Heidelberg, 1–15. <a href="https://doi.org/10.1007/s13748-013-0040-3">https://doi.org/10.1007/s13748-013-0040-3</a>.</p>
+</div>
+<div id="ref-R-gbm">
+<p>Greenwell, Brandon, Bradley Boehmke, Jay Cunningham, and GBM Developers. 2019. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://CRAN.R-project.org/package=gbm">https://CRAN.R-project.org/package=gbm</a>.</p>
+</div>
+<div id="ref-R-e1071">
+<p>Meyer, David, Evgenia Dimitriadou, Kurt Hornik, Andreas Weingessel, and Friedrich Leisch. 2019. <em>E1071: Misc Functions of the Department of Statistics, Probability Theory Group (Formerly: E1071), Tu Wien</em>. <a href="https://CRAN.R-project.org/package=e1071">https://CRAN.R-project.org/package=e1071</a>.</p>
+</div>
+<div id="ref-molnar2018interpretable">
+<p>Molnar, Christoph. 2018. <em>Interpretable Machine Learning - a Guide for Making Black Box Models Explainable</em>. Creative Commons. <a href="https://christophm.github.io/interpretable-ml-book/">https://christophm.github.io/interpretable-ml-book/</a>.</p>
+</div>
+<div id="ref-R-base">
+<p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+</div>
+</div>
+</div>

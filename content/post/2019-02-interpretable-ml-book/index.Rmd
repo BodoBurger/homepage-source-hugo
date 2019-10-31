@@ -4,23 +4,19 @@ author: "Bodo Burger"
 date: "2019-02-26"
 tags: ["Interpretable ML", "explainable AI"]
 categories: ["Books"]
-output:
-  md_document:
-    variant: markdown+yaml_metadata_block
-    toc: no
 draft: False
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = TRUE,
                       cache = FALSE, cache.path = "cache/",
-                      fig.path = "figures/interpretable-ml-book/")
+                      fig.path = "figures/")
 library("ggplot2")
 theme_set(theme_light())
 set.seed(4218)
 ```
 
-Digital version can be bought on
+The digital version of the book can be bought on
 [leanpub](https://leanpub.com/interpretable-machine-learning).
 You can find a free online version of the book here:
 https://christophm.github.io/interpretable-ml-book

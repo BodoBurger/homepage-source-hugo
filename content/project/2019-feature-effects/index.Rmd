@@ -1,0 +1,301 @@
+---
+title: "Feature Effects in Machine Learning Models"
+author: "Bodo Burger"
+date: '2019-04-06'
+output:
+  blogdown::html_page:
+    toc: yes
+    number_sections: false
+links:
+- icon: github
+  icon_pack: fab
+  name: R package source
+  url: https://github.com/BodoBurger/intame
+image:
+  caption: null
+  focal_point: Smart
+summary: I estimate interval-based feature effects in supervised learning models to
+  improve interpretability of black box models.
+tags:
+- Interpretable ML
+- Machine Learning
+- r-stats
+bibliography:
+- references.bib
+- packages.bib
+url_code: ''
+url_pdf: ''
+url_slides: ''
+url_video: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = TRUE,
+                      cache = TRUE, cache.path = "cache/",
+                      fig.path = "figures/", fig.align='center')
+set.seed(4218)
+options(digits = 3)
+library("ggplot2")
+library("intame")
+library("patchwork")
+theme_set(theme_light())
+library("tree")
+library("mlr")
+#options(kableExtra.latex.load_packages = FALSE)
+#library(kableExtra)
+```
+
+# Summary
+
+Supervised machine learning models are mostly black boxes.
+The method I propose in my Master's thesis tries to improve understanding of these black boxes.
+The goal is to find a way to quantify effect sizes of features.
+Average marginal effects are used in social sciences
+to determine effect sizes of logistic regression models.
+Applying this method to a machine learning model usually does not
+adequately represent the non-convex, non-monotonic response function.
+There are graphical methods like partial dependence plots or accumulated local effect plots
+that visualize the response functions but do not offer a quantitative interpretation.
+First, we use one of the latter methods to identify intervals
+within the response function is relatively stable.
+Second, we report some estimate of the feature effect separately for each interval.
+Our method determines the number of necessary intervals automatically.
+
+# Example: Bike Sharing Data
+
+The following examples shows
+how the method can help to understand heterogeneous feature effects.
+We apply the method to the Bike Sharing dataset [@fanaee2013event]
+which was further processed by @molnar2018interpretable.
+See table \@ref(tab:bikes-load-data) for an overview of all the features.
+The target `cnt` is the number of bicycles
+lent by a bicycle sharing company per day.
+The features comprise calendrical and meteorological information for each day.
+
+```{r bikes-load-data}
+load("bike.RData")
+bike[, "workingday"] = NULL
+levels(bike$holiday) = c("0", "1")
+cap_bikes_load_data = "Excerpt of the Bike Sharing dataset"
+knitr::kable(head(bike), caption = cap_bikes_load_data)
+```
+
+
+## Model Training
+
+We use a linear model [@R-base], an SVM [@R-e1071], 
+a random decision forest [@R-randomForest] and gradient boosting [@R-gbm].
+We compare the performance of all models and the performance
+of predicting the mean for each observation on a hold-out test set
+(see table \@ref(tab:bikes-model-training)).
+The linear model performs relatively well
+but we can improve by using a more complex machine learning model
+even without extensive tuning.
+
+```{r bikes-model-training}
+set.seed(4218)
+n = nrow(bike)
+test = logical(n) # test set
+test[sample(1:n, 250)] = TRUE
+test_cnt = bike[test,]$cnt
+
+calculate_performance = function(actual, predicted) {
+  predicted[predicted < 0] = 0
+  setNames(c(
+      Metrics::mse(actual, predicted),
+      Metrics::rmsle(actual, predicted),
+  1 - Metrics::rse(actual, predicted)),
+  c("mse", "rmsle", "rsq"))
+}
+
+tsk = makeRegrTask(data=bike, target="cnt") # create task
+
+lm.lrn = makeLearner("regr.lm")
+lm.mod = train(lm.lrn, tsk, subset=!test)
+lm.pred = getPredictionResponse(predict(lm.mod, newdata=bike, subset=test))
+lm.perf = calculate_performance(test_cnt, lm.pred)
+
+svm.lrn = makeLearner("regr.svm")
+svm.mod = train(svm.lrn, tsk, subset=!test)
+svm.perf = performance(predict(svm.mod, newdata=bike, subset=test), 
+  list(mse, rmsle, rsq))
+
+rf.lrn = makeLearner("regr.randomForest")
+rf.mod = train(rf.lrn, tsk, subset=!test)
+rf.pred = getPredictionResponse(predict(rf.mod, newdata=bike, subset=test))
+rf.perf = calculate_performance(test_cnt, rf.pred)
+
+ntrees = 1000
+gbm.lrn = makeLearner("regr.gbm", n.trees=ntrees, interaction.depth=1,
+  shrinkage=.1)
+gbm.mod = train(gbm.lrn, tsk, subset=!test)
+gbm.pred = getPredictionResponse(predict(gbm.mod, newdata=bike, subset=test))
+gbm.perf = calculate_performance(test_cnt, gbm.pred)
+
+mean.perf = calculate_performance(test_cnt, mean(test_cnt))
+
+table.perf = data.frame(mean.perf, lm.perf, svm.perf, rf.perf, gbm.perf)
+knitr::kable(table.perf, col.names=c("mean(y)", "lm", "svm", "rf", "gbm"),
+  caption="Mean squared error, root mean squared log error,
+  and R squared for hold-out test set",
+  booktabs=TRUE)
+
+features = c("temp", "hum", "windspeed")
+metric_name = "L2"
+```
+
+## Analysis
+
+```{r bikes-compute-intame}
+models = list(SVM = svm.mod, RF = rf.mod, GBM = gbm.mod)
+intame_results = vector("list")
+for (i in seq_along(models)) {
+  model_name = names(models)[i]
+  for (k in seq_along(features)) {
+    feature = features[k]
+    result = intame(models[[i]], bike[!test,], feature)
+    intame_results[[paste0(model_name, "_", feature)]] =
+      list(model_name = model_name, feature = feature, result = result)
+  }
+}
+```
+
+Now analyse how changing feature values influences
+the predicted number of bikes.
+We focus on the three numerical features `temp` (temperature in degree Celsius),
+`hum` (humidity in percent) and `windspeed` (in kilometers per hour).
+We apply our method to each of the complex models with default settings.
+The output in `R` looks as follows:
+
+```{r bikes-intame-output, collapse=TRUE}
+lm.coef = coef(lm.mod$learner.model)
+cat("lm:\n")
+lm.coef[features]
+for (i in seq_along(intame_results)) {
+  result = intame_results[[i]]
+  cat(result[["model_name"]], " (", result[["feature"]], ")\n", sep = "")
+  print(result[["result"]])
+}
+```
+
+The marginal effect of the linear model is equal to the model coefficients.
+So according to the model an increase of the temperature by 1° Celsius
+leads to a predicted increase of $`r lm.coef['temp']`$. rented bicycles per day.
+This seems plausible for an average day.
+The higher the temperature the more people are willing to go by bike.
+But one could easily imagine that a temperature rise on a hot day
+will make people less likely rent a bike to avoid physical exertion.
+This is exactly what the results of the complex models suggest.
+Below 20° the SVM predicts an increase of
+$`r intame_results[['SVM_temp']][[3]][['AME']][1]`$
+bikes per day for an additional degree Celsius.
+Above 20° the effect becomes negative and very small
+$(`r intame_results[['SVM_temp']][[3]][['AME']][2]`)$.
+The results of the random forest show two cutoff points.
+At around 13° the positive marginal effect becomes smaller in size
+and above 25° the effect is negative.
+The effect for gradient boosting is partitioned into four intervals.
+The effect of the three intervals below 27° are positive,
+above 27° it is negative, similarly to the results of the other two models.
+However, the absolute values of the effect fluctuate substantially
+for gradient boosting.
+
+For humidity the linear model predicts a negative effect.
+For the SVM the effect is positive up to around 43%.
+Between 43% and 65% the effect is negative but smaller in size.
+Above 65% it is negative and 
+four times bigger than in the previous interval.
+The results for the random forest and gradient boosting
+both show very small effects below roughly 65% humidity.
+Above this point both models predict a decrease of rented bicycles
+with rising humidity.
+The histogram (figure \@ref(fig:bikes-hum-hist)) explains
+why the effect for humidity is probably non-monotonic.
+Humidity usually is between 50% to 75%.
+Values outside this range indicate more extreme weather conditions.
+If uncommonly dry or wet air reduces people's desire to ride a bike
+we will expect a positive effect on the number of rented bikes
+if humidity is below the familiar range, and a negative effect if it is above.
+
+(ref:bikes-hum-hist) Histogram for feature `humidity` of the Bike Sharing dataset.
+
+```{r bikes-hum-hist, fig.height=4, fig.width=4, fig.cap='(ref:bikes-hum-hist)', out.width='40%'}
+ggplot(bike, aes(x=hum)) + geom_histogram(bins = 35) + 
+  xlab("Humidity in Percent") + ylab("Frequency")
+```
+
+Wind makes cycling less attractive, so one associates higher wind speed
+with a reduced willingness to rent a bike.
+The linear model predicts a negative effect ($`r lm.coef['windspeed']`$).
+For both SVM and random forest our method proposes a negative effect
+that is constant over the whole feature distribution.
+Consequently, in the case of wind speed a linear model seems to be appropriate 
+to represent the relationship.
+Gradient boosting shows a negative effect for five intervals,
+the reported values are not very stable, again.
+
+In this exemplary application we showed that
+the linear model does not suffice to represent the varying response function types.
+A user may come to wrong conclusions about the number of rented bikes
+depending on the weather conditions of the day.
+The proposed method enables the user to make quantitative statements
+as if he was using a linear model
+while preserving the non-linear, non-monotonic relationship where necessary.
+Thus, he can combine a better performing model with a comprehensible interpretation.
+The results for the gradient boosting model are less convincing.
+Due to the stepped response function the model is less appropriate
+for making quantitative statements about the feature effect.
+The estimates fluctuate between high values and values close to zero.
+
+(ref:bikes-results-svm) Bike sharing data. Results SVM.
+
+```{r bikes-results-svm, fig.cap='(ref:bikes-results-svm)', fig.height=4, fig.width=12}
+plot(intame_results[['SVM_temp']]$result) + xlab("Temperature") +
+plot(intame_results[['SVM_hum']]$result) + xlab("Humidity") +
+plot(intame_results[['SVM_windspeed']]$result) + xlab("Windspeed")
+```
+
+
+(ref:bikes-results-gbm) Bike sharing data. Results gradient boosting.
+
+```{r bikes-results-gbm, fig.cap='(ref:bikes-results-gbm)', fig.height=4, fig.width=12}
+plot(intame_results[['GBM_temp']]$result) + xlab("Temperature") +
+plot(intame_results[['GBM_hum']]$result) + xlab("Humidity") +
+plot(intame_results[['GBM_windspeed']]$result) + xlab("Windspeed")
+```
+
+
+(ref:bikes-results-rf) Bike sharing data. Results random forest.
+
+```{r bikes-results-rf, fig.cap='(ref:bikes-results-rf)', fig.height=4, fig.width=12}
+plot(intame_results[['RF_temp']]$result) + xlab("Temperature") +
+plot(intame_results[['RF_hum']]$result) + xlab("Humidity") +
+plot(intame_results[['RF_windspeed']]$result) + xlab("Windspeed")
+```
+
+
+
+```{r, eval=FALSE}
+plot(intame(svm.mod, bike[!test,], "temp")) + xlab("Temperature")
+plot(intame(svm.mod, bike[!test,], "hum")) + xlab("Humidity")
+plot(intame(svm.mod, bike[!test,], "windspeed")) + xlab("Windspeed")
+plot(intame(svm.mod, bike[!test,], "days_since_2011")) + xlab("Days since")
+
+plot(intame(rf.mod, bike[!test,], "temp")) + xlab("Temperature")
+plot(intame(rf.mod, bike[!test,], "hum")) + xlab("Humidity")
+plot(computeFE(rf.mod, bike[!test,], "windspeed")) + xlab("Windspeed")
+plot(computeFE(lm.mod, bike[!test,], "days_since_2011")) + xlab("Days since")
+
+#plot(intame(rf.mod, bike[!test,], "temp")) + xlab("Temperature")
+#intame(lm.mod, bike, "temp")
+#plot(intame(lm.mod, bike, "hum"))
+```
+
+# R package
+
+The method is implemented in **R** supporting a variety of models out of the box.
+Source code and more information can be found on GitHub:
+https://github.com/BodoBurger/intame
+
+# References
+
