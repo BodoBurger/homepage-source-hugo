@@ -29,6 +29,6 @@ deploy:
 	&& git add . \
 	&& git status \
 	&& git commit -m "Deploy via Makefile and Netlify" \
-	&& git push -f -q https://$(GITHUB_TOKEN)@github.com/gh-username/gh-username.github.io.git master
+	&& git push -f -q https://$(GITHUB_TOKEN)@github.com/bodoburger/bodoburger.github.io.git master
 
 	@echo "Pushed to remote"
